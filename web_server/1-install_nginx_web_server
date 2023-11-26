@@ -1,8 +1,20 @@
 #!/usr/bin/env bash
-#This installs Nginx on my web-01 server
-sudo apt-get update
-sudo apt-get install nginx -y
-sudo mkdir /var/www/html
-sudo touch /var/www/html/index.html
-sudo echo "Holberton School" > /var/www/html/index.html
-sudo service nginx start
+# Installing nginx (engine x)
+
+apt-get update
+apt-get -y install nginx
+
+# Adding an HTML page
+
+echo "Holberton School" > /var/www/html/index.html
+
+# Checking if the service is running
+
+state=$(pgrep nginx)
+
+if [ -n "$state" ];
+then
+	sudo service nginx start
+else
+	sudo service nginx restart
+fi
