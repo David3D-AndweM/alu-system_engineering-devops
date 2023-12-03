@@ -1,17 +1,24 @@
-#!/usr/bin/env bash
-#Installing Nginx and configuring it
-sudo apt update -y
-sudo apt install nginx -y
-new_config=\
-"server {
-	listen 80 default_server;
-	listen [::]:80 default_server;
-		root /var/www/html;
-	index index.html index.html index.nginx-debian.html;
-	server_name _;
-	add_header X-Served-By $HOSTNAME;
-}
-"
-sudo chown -R "$USER":"$USER" /etc/nginx/sites-available/default
-echo "$new_config" > /etc/nginx/sites-available/default
-sudo service nginx restart
+#!/bin/bash
+
+# Install Nginx
+sudo apt-get update
+sudo apt-get install -y nginx
+
+# Get the hostname of the server
+HOSTNAME=$(hostname)
+
+# Define the student ID
+STUDENT_ID="678476842"
+
+# Create Nginx configuration file for custom header
+echo "add_header X-Served-By $STUDENT_ID-web-01;" | sudo tee /etc/nginx/conf.d/0-custom-header
+
+# Reload Nginx to apply the changes
+sudo systemctl reload nginx
+
+# Verify the configuration
+curl -sI http://localhost | grep X-Served-By
+
+# Display a message indicating success
+echo "Nginx has been configured with the custom header on $HOSTNAME"
+
