@@ -6,7 +6,9 @@ apt-get -y install nginx
 
 # Adding an HTML page
 
-echo "Holberton School" > /var/www/html/index.html
+sudo  ufw 'NGINX HTTP'
+
+echo "Holberton School" >sudo tee  /var/www/html/index.html
 
 # Checking if the service is running
 
