@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
-ufw allow 22/tcp
-ufw allow 443/tcp
-ufw allow 80/tcp
+#u go debug tire no evidence!
+sudo apt install ufw
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow 22/tcp
+sudo ufw allow 443/tcp
+sudo ufw allow 80/tcp
+sudo ufw enable
+sudo ufw status verbose
